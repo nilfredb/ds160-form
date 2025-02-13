@@ -1,0 +1,35 @@
+# --- ⚡ GENERAL ⚡ ---
+.DS_Store        # MacOS
+Thumbs.db        # Windows
+*.log            # Archivos de log
+node_modules/    # Dependencias de Node.js (Frontend y Backend)
+dist/            # Carpeta generada en Vite al compilar el frontend
+build/           # Carpeta generada en otros entornos (como React CRA)
+.env             # Variables de entorno (Backend y Frontend)
+.env.local       
+.env.*.local    
+*.swp            # Archivos temporales de Vim
+
+# --- ⚡ BACKEND (SERVER) ⚡ ---
+server/node_modules/  
+server/dist/    
+server/build/  
+server/.env  
+server/.DS_Store  
+server/logs/  
+
+# --- ⚡ FRONTEND (VITE) ⚡ ---
+ds-160/node_modules/  
+ds-160/dist/  
+ds-160/.DS_Store  
+ds-160/.env  
+ds-160/vite.config.ts  
+ds-160/yarn.lock  # Si usas Yarn
+ds-160/package-lock.json  # Si usas npm (opcional)
+
+# --- ⚡ GIT & EDITORES ⚡ ---
+.git/
+.vscode/          # Configuración de Visual Studio Code
+.idea/            # Configuración de WebStorm / PHPStorm
+*.sublime-project
+*.sublime-workspace
