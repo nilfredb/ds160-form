@@ -97,8 +97,8 @@ export default function Privacy() {
               </h2>
               <p className="space-y-2">
                 <div>Oficina de Privacidad de Datos</div>
-                <div>Email: privacidad@visalegal.com</div>
-                <div>Teléfono: +1 (829) 929-5562</div>
+                <div>Email: visalegalexperts@gmail.com</div>
+                <div>Teléfono: +1 (809) 502-4126</div>
                 <div>Dirección: 1234 Brickell Avenue, Suite 567 Miami, FL 33131</div>
               </p>
             </section>

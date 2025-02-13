@@ -577,6 +577,7 @@ export default function FormDS160() {
                     de Estado es de <strong>US$160</strong>. Este valor no es 
                     reembolsable.
                   </p>
+                  <br/>
                   <p className="text-gray-600 leading-relaxed">
                     Nuestro servicio de asesoría y llenado del DS-160 tiene un 
                     costo adicional de <strong>US$50</strong>. Con este pago, 
@@ -584,7 +585,7 @@ export default function FormDS160() {
                     Si tienes dudas adicionales, no dudes en consultarnos o 
                     revisar nuestros Términos y Condiciones.
                   </p>
-
+                  <br/>
                   <p className="text-gray-600 leading-relaxed">
                     Por favor, confirma que has leído y aceptas los siguientes 
                     <strong> Términos y Condiciones</strong> antes de enviar.

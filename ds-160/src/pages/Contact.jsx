@@ -113,7 +113,7 @@ export default function Contact() {
               <PhoneIcon className="h-8 w-8 text-blue-600 mr-4" />
               <div>
                 <h3 className="text-lg font-semibold">Teléfono</h3>
-                <p className="text-gray-600">+1 (829) 929-5562</p>
+                <p className="text-gray-600">+1 (809) 502-4126</p>
               </div>
             </div>
             
@@ -121,7 +121,8 @@ export default function Contact() {
               <EnvelopeIcon className="h-8 w-8 text-blue-600 mr-4" />
               <div>
                 <h3 className="text-lg font-semibold">Correo Electrónico</h3>
-                <p className="text-gray-600">contacto@visalegal.com</p>
+                <p className="text-gray-600">visalegalexperts@gmail.com
+                </p>
               </div>
             </div>
 

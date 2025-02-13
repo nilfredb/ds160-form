@@ -81,7 +81,7 @@ export default function Schedule() {
         >
           <div
             className="calendly-inline-widget"
-            data-url="https://calendly.com/nbaez414/ds-160-reunion" 
+            data-url="https://calendly.com/visalegalexperts/ds-160-reunion" 
             style={{ minWidth: '320px', height: '700px' }}
           />
         </motion.div>
