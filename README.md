@@ -2,6 +2,10 @@
 
 Este es un proyecto web para la gestión y asesoría de trámites de visa, desarrollado con **React (Vite) para el frontend** y **Node.js (Express) para el backend**.
 
+## 📌 Live Demo
+Puedes ver la versión en vivo del proyecto en:  
+🌐 **[VisaLegal Experts - Live Demo](https://visalegalexperts.com)**
+
 ## 📌 Tecnologías Usadas
 - **Frontend:** React + Vite + Tailwind CSS
 - **Backend:** Node.js + Express
