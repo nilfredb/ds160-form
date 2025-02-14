@@ -1,112 +1,134 @@
+README.txt
+
 ======================================================
  DS-160 Form Project with React & Node (Express)
 ======================================================
 
-Este proyecto implementa un formulario DS-160 con varias secciones 
-tipo “wizard”, validaciones y envío de datos a un servidor Node/Express 
-que reenvía la información por correo (Nodemailer).
+Este proyecto implementa un formulario DS-160 que se envía a un servidor Node/Express para procesar y enviar los datos por correo.
 
 Live Demo:
 ----------
-Puedes ver una demostración en:
+Puedes ver una demostración en producción en:
 https://visalegalexperts.com
 
-----------------------------------------------------
+------------------------------------------------------
 1. Estructura del Proyecto
-----------------------------------------------------
+------------------------------------------------------
 
-├─ ds-160/          (Carpeta con el frontend de React)
-│   ├─ src/         (Componentes, páginas, etc.)
-│   ├─ package.json (Dependencias frontend)
-│   └─ ...          
-│
-└─ server/          (Carpeta con el backend en Node + Express)
-    ├─ index.js     (Archivo principal que inicia Express)
-    ├─ package.json (Dependencias backend)
-    └─ .env         (Variables de entorno)
+El proyecto está dividido en dos partes principales:
 
-----------------------------------------------------
-2. Descripción General
-----------------------------------------------------
+1) Frontend (React)
+   - Ubicado en la carpeta: ds-160 (o nombre equivalente).
+   - Utiliza Vite o Create React App para su configuración.
+   - Contiene el código fuente de la SPA (Single Page Application) que incluye
+     varias secciones y un wizard para completar el formulario DS-160.
+   - También incluye una página de Contacto con un formulario más sencillo.
+   - Se compila en un build estático (carpeta "build/" o "dist/").
 
-Frontend (React):
-- Estructurado como un formulario DS-160 por pasos (wizard).
-- Validaciones con React Hook Form + Yup (campos obligatorios, 
-  patrones, etc.).
-- Incluye una página de “Contacto” más simple.
-- Usa Framer Motion para animaciones sutiles y Tailwind CSS 
-  para estilos.
+2) Backend (Node + Express)
+   - Ubicado en la carpeta: server (o nombre equivalente).
+   - Contiene un archivo "index.js" o "server.js" que inicia un servidor
+     Express, escuchando en un puerto (por defecto, 4000).
+   - Maneja rutas como "/api/ds160" y "/api/contact", procesando datos recibidos
+     y enviándolos por correo vía Nodemailer con credenciales de Gmail (App Password).
+   - Puede configurarse con un Reverse Proxy en Apache, Nginx o similar.
 
-Backend (Node/Express):
-- Un servidor que escucha peticiones POST en rutas como "/api/ds160" 
-  y "/api/contact".
-- Al recibir los datos, envía un correo usando Nodemailer con 
-  las credenciales definidas en variables de entorno.
+------------------------------------------------------
+2. Requisitos y Configuración
+------------------------------------------------------
 
-----------------------------------------------------
-3. Ejecución Local
-----------------------------------------------------
+- Node.js >= 16 (recomendado Node 18 o 20 para evitar warnings).
+- NPM o Yarn para instalar dependencias.
 
-A) Frontend
-   1. Ve a la carpeta ds-160/
-   2. Instala dependencias: npm install
-   3. Inicia modo desarrollo: npm run dev
-      - Proyecto en http://localhost:5173
+Pasos básicos de instalación:
 
-B) Backend
-   1. Ve a la carpeta server/
-   2. Crea un archivo .env con:
-      EMAIL_USER="tu-correo@gmail.com"
-      EMAIL_PASS="app-password"   (App Password de Gmail)
-      EMAIL_TO="destinatario@correo.com"
-   3. Instala dependencias: npm install
-   4. Inicia servidor: node index.js
-      - Escucha por defecto en http://localhost:4000
+1) Clonar el repositorio:
+   git clone https://github.com/tu-usuario/ds160-project.git
+   (o descargar el ZIP)
 
-----------------------------------------------------
+2) Instalar dependencias del Frontend:
+   cd ds-160
+   npm install
+
+3) Compilar el frontend para producción:
+   npm run build
+   (Genera la carpeta "dist/" o "build/" con los archivos estáticos.)
+
+4) Instalar dependencias del Backend:
+   cd ../server
+   npm install
+
+5) Configurar variables de entorno en "server/.env":
+   EMAIL_USER="tu-correo@gmail.com"
+   EMAIL_PASS="tu-app-password"   (App Password de Gmail)
+   EMAIL_TO="destinatario@correo.com"
+   (y cualquier otra variable que requieras)
+
+6) Iniciar el servidor:
+   node index.js
+   # o nodemon index.js, pm2, etc.
+
+------------------------------------------------------
+3. Despliegue en un Servidor con Apache (Ejemplo)
+------------------------------------------------------
+
+A) Servir el Frontend:
+   - Mover la carpeta compilada (dist/ o build/) dentro de /var/www/html/ds-160
+   - Configurar el VirtualHost en Apache (ds-160.conf) para que DocumentRoot
+     apunte a /var/www/html/ds-160 y reescriba rutas a index.html.
+
+B) Correr el Backend:
+   - Ubicar la carpeta "server" en /var/www/html/server o en otra ruta.
+   - Iniciar con "node index.js" o usar un manejador de procesos (PM2, systemd).
+   - Asegúrate de que escuche en un puerto (ej. 4000).
+
+C) (Opcional) Configurar Reverse Proxy:
+   - Habilitar mod_proxy y mod_proxy_http en Apache.
+   - Añadir ProxyPass /api http://127.0.0.1:4000/api en tu VirtualHost.
+
+------------------------------------------------------
 4. Flujo de Uso
-----------------------------------------------------
+------------------------------------------------------
 
-1) El usuario completa el formulario DS-160 (secciones, validaciones).
-2) Al finalizar, un clic en “Enviar” dispara un POST a "/api/ds160" 
-   con todos los datos.
-3) El servidor (Node) recibe, arma un correo y lo envía a EMAIL_TO 
-   vía Nodemailer.
-4) El frontend notifica al usuario si tuvo éxito o falló.
+1) El usuario ingresa a https://visalegalexperts.com (live demo) y ve la
+   aplicación React. Allí puede:
+   - Completar el wizard DS-160, paso a paso.
+   - Llenar el formulario de Contacto, si desea.
 
-En la página “Contacto” sucede lo mismo pero a "/api/contact", 
-con un formulario más simple.
+2) Al finalizar el formulario DS-160, al hacer clic en "Enviar Solicitud",
+   el Frontend envía un POST a "/api/ds160", donde Express recibe los datos,
+   arma un correo con Nodemailer y lo remite a la dirección configurada en
+   EMAIL_TO.
 
-----------------------------------------------------
-5. Personalización
-----------------------------------------------------
+3) El usuario recibe un mensaje de éxito o error, según la respuesta del servidor.
 
-- ds160Questions (carpeta data/): lista de campos y secciones 
-  que definen el formulario.
-- Yup Schema: se configuran las validaciones (campos obligatorios, 
-  condicionales).
-- Email Credentials (server/.env): ajustar a tu cuenta Gmail o 
-  cualquier servicio SMTP.
-- Lógica de diseño: ver componentes como DynamicField, Sidebar, 
-  Hero, etc.
+------------------------------------------------------
+5. Créditos y Detalles
+------------------------------------------------------
 
-----------------------------------------------------
-6. Observaciones
-----------------------------------------------------
+- Librerías Principales:
+  - React, React Hook Form, Yup: Para la validación y el wizard del DS-160.
+  - Framer Motion: Animaciones suaves.
+  - Nodemailer: Envío de correos desde Node.
+  - Tailwind CSS: Estilos en las páginas.
 
-- Para usar Gmail, es recomendable una App Password (ver 
-  documentación de Google).
-- El wizard DS-160 maneja validaciones condicionales: si 
-  “Sí”, aparecen campos extras; si “No”, se borran.
-- React Hook Form y Yup rechazarán la navegación al siguiente 
-  paso si faltan campos obligatorios.
+- Para las preguntas y campos del DS-160, se usa un arreglo "ds160Questions"
+  que define cada sección y sus campos. La validación condicional se maneja
+  con Yup.
 
-----------------------------------------------------
-7. Contacto
-----------------------------------------------------
+- El botón de WhatsApp y otros añadidos (Disclaimer, Sidebar) son ejemplos
+  de integración adicional para mejorar la experiencia del usuario.
 
-Para dudas o sugerencias sobre este proyecto, 
-puedes abrir un “Issue” en el repo o escribir a:
-nbaez414@gmail.com
+------------------------------------------------------
+6. Soporte o Contribuciones
+------------------------------------------------------
 
-¡Gracias por utilizar este DS-160 Form Project!
+Si encuentras un problema o deseas colaborar:
+- Crea un "Issue" en el repositorio de GitHub.
+- O contáctanos a contacto@visalegal.com.
+
+¡Gracias por probar el DS-160 Project!
+
+------------------------------------------------------
+Fin del README
+
