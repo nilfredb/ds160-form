@@ -33,7 +33,7 @@ export default function Contact() {
     setErrorMessage('');
 
     try {
-      const response = await fetch('https://api.visalegalexperts.com/api/contact', {
+      const response = await fetch('https://api.visalegalexperts.com/api/contact', { //Cambia esta direccion por la direccion que usas en tu backend o dejala http://localhost:4000/api/contact para pruebas locales
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

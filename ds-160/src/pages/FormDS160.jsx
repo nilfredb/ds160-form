@@ -287,7 +287,7 @@ export default function FormDS160() {
       setErrorMessage('');
 
       console.log('Enviando datos DS-160...', formData);
-      const response = await fetch('https://api.visalegalexperts.com/api/ds160', {
+      const response = await fetch('https://api.visalegalexperts.com/api/ds160', { //Cambia esta direccion por la direccion que usas en tu backend o dejala http://localhost:4000/api/ds160 para pruebas locales
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
