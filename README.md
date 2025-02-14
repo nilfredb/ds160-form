@@ -1,6 +1,6 @@
-====================================================
- DS-160 Form Project (React + Node)
-====================================================
+======================================================
+ DS-160 Form Project with React & Node (Express)
+======================================================
 
 Este proyecto implementa un formulario DS-160 con varias secciones 
 tipo “wizard”, validaciones y envío de datos a un servidor Node/Express 
