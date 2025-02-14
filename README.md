@@ -1,97 +1,101 @@
+# Proyecto VisaLegal Experts
 
+Este es un proyecto web para la gestión y asesoría de trámites de visa, desarrollado con **React (Vite) para el frontend** y **Node.js (Express) para el backend**.
 
-------------------------------------------------------
- DS-160 Form Project with React & Node (Express)
-------------------------------------------------------
+## 📌 Tecnologías Usadas
+- **Frontend:** React + Vite + Tailwind CSS
+- **Backend:** Node.js + Express
+- **Base de datos:** (Opcional, si se usa una DB como MySQL)
+- **Servidor:** Ubuntu Server con Nginx (en caso de producción)
 
-Este proyecto implementa un formulario DS-160 que se envía a un servidor 
-Node/Express para procesar la información y enviarla por correo.
+---
 
-Live Demo:
-----------
-Visita la versión en línea:
-https://visalegalexperts.com
+## 📥 Instalación y Configuración
 
-------------------------------------------------------
-1. Estructura del Proyecto
-------------------------------------------------------
+### 🔹 1️⃣ Clonar el Repositorio
+```bash
+git clone https://github.com/nilfredb/ds160-form.git
+cd tu-repo
+```
 
-├─ ds-160/          
-│   ├─ src/         (Código fuente del frontend - React)
-│   ├─ package.json (Dependencias del frontend)
-│   └─ ...          
-│
-└─ server/          
-    ├─ index.js     (Backend en Node/Express)
-    ├─ package.json (Dependencias del backend)
-    └─ .env         (Credenciales y configuración)
+---
 
-------------------------------------------------------
-2. Descripción General
-------------------------------------------------------
+### 🔹 2️⃣ Configurar el Backend
+```bash
+cd server
+npm install
+```
 
-Front (React):
-- Un wizard DS-160 con varias secciones y validaciones 
-  condicionales (React Hook Form + Yup).
-- Framer Motion para animaciones sutiles.
-- Tailwind CSS para estilos.
+📌 **Configurar variables de entorno en `.env`**
+```env
+EMAIL_USER="tucorreo@gmail.com"
+EMAIL_PASS="tucontraseña"
+EMAIL_TO="destinatario@gmail.com"
+```
 
-Back (Express):
-- Recibe los POST desde "/api/ds160" y "/api/contact".
-- Envía los datos vía Nodemailer usando credenciales 
-  configuradas en .env (EMAIL_USER, EMAIL_PASS, EMAIL_TO).
+📌 **Ejecutar el backend**
+```bash
+node index.js
+```
+🔹 Para mantenerlo en ejecución en un servidor:
+```bash
+npm install -g pm2
+pm2 start index.js --name "backend"
+pm2 save
+```
 
-------------------------------------------------------
-3. Cómo Ejecutar Localmente
-------------------------------------------------------
+---
 
-A) Frontend:
-   1. cd ds-160
-   2. npm install
-   3. npm run dev
-   - Levanta en http://localhost:5173
+### 🔹 3️⃣ Configurar el Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+📌 Luego, abre en tu navegador:
+```
+http://localhost:5173
+```
 
-B) Backend:
-   1. cd server
-   2. npm install
-   3. Crear .env con:
-      EMAIL_USER="tu-correo@gmail.com"
-      EMAIL_PASS="app-password"
-      EMAIL_TO="destino@ejemplo.com"
-   4. node index.js
-   - Escucha en http://localhost:4000
+Para **modo producción**:
+```bash
+npm run build
+```
+Si usas **Nginx en un servidor**, asegúrate de configurar `dist/` como root.
 
-------------------------------------------------------
-4. Flujo de Uso
-------------------------------------------------------
+---
 
-1) El usuario completa el DS-160 por pasos (wizard).
-2) Pulsa "Enviar Solicitud" => se hace POST a /api/ds160.
-3) El servidor procesa y reenvía un correo con los datos.
-4) El usuario ve un mensaje de éxito o error.
+## 🚀 Despliegue en Producción
+Si deseas alojarlo en un servidor propio:
+1. **Configura un VPS con Ubuntu Server**
+2. **Instala Node.js, Nginx y Git**
+3. **Sube el código y configura Nginx**
+4. **Asegura el sitio con un certificado SSL**
 
-Lo mismo ocurre con la página "Contacto" usando "/api/contact".
+📌 **Ejemplo de configuración de Nginx** para React:
+```nginx
+server {
+    listen 80;
+    server_name tu-dominio.com;
+    
+    root /home/usuario/tu-repo/frontend/dist;
+    index index.html;
+    
+    location / {
+        try_files $uri /index.html;
+    }
+}
+```
+Luego, reinicia Nginx:
+```bash
+sudo systemctl restart nginx
+```
 
-------------------------------------------------------
-5. Personalización
-------------------------------------------------------
+---
 
-- ds160Questions (carpeta data/) define campos y secciones.
-- Yup validations en generateValidationSchema() ajustan 
-  patrones y requerimientos.
-- .env en backend para credenciales de correo (Nodemailer).
-- Para CSS, usamos Tailwind; para animaciones, Framer Motion.
+## 📌 Contacto y Créditos
+- Desarrollado por: **[Nilfred]**
+- Email: nbaez414@gmail.com
+- Web: https://nilfred.dev
 
-------------------------------------------------------
-6. Créditos
-------------------------------------------------------
-
-- React Hook Form + Yup para validaciones.
-- Nodemailer para envío de correos.
-- Framer Motion y Tailwind para UI/UX.
-- Proyecto de demostración en:
-  https://visalegalexperts.com
-
-¡Gracias por usar este DS-160 Form Project!
-
-
+📌 **Si necesitas ayuda con la instalación, abre un issue en GitHub.** 🚀
