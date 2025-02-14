@@ -41,7 +41,7 @@ El proyecto está dividido en dos partes principales:
 Pasos básicos de instalación:
 
 1) Clonar el repositorio:
-   git clone https://github.com/tu-usuario/ds160-project.git
+   git clone (https://github.com/nilfredb/ds160-form.git)
    (o descargar el ZIP)
 
 2) Instalar dependencias del Frontend:
